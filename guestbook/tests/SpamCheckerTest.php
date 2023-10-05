@@ -50,4 +50,6 @@ class SpamCheckerTest extends TestCase
         yield 'ham' => [0, $response, $comment, []];
     }
 
+
+
 }
