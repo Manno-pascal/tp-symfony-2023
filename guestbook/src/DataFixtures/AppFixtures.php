@@ -5,17 +5,16 @@ namespace App\DataFixtures;
 use App\Entity\Admin;
 use App\Entity\Comment;
 use App\Entity\Conference;
+use App\Enum\CommentStateEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 class AppFixtures extends Fixture
 {
-
     public function __construct(
         private PasswordHasherFactoryInterface $passwordHasherFactory,
-    )
-    {
+    ) {
     }
 
     public function load(ObjectManager $manager): void
@@ -37,7 +36,16 @@ class AppFixtures extends Fixture
         $comment1->setAuthor('Fabien');
         $comment1->setEmail('fabien@example.com');
         $comment1->setText('This was a great conference.');
+        $comment1->setState(CommentStateEnum::PUBLISHED);
         $manager->persist($comment1);
+
+        $comment2 = new Comment();
+        $comment2->setConference($amsterdam);
+        $comment2->setAuthor('Tom');
+        $comment2->setEmail('tom@example.com');
+        $comment2->setText('Ne fonctionne pas');
+        $manager->persist($comment2);
+
 
         $admin = new Admin();
         $admin->setRoles(['ROLE_ADMIN']);

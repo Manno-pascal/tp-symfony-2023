@@ -9,7 +9,6 @@ use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-
 class SpamCheckerTest extends TestCase
 {
     public function testSpamScoreWithInvalidRequest(): void
@@ -49,7 +48,4 @@ class SpamCheckerTest extends TestCase
         $response = new MockResponse('false');
         yield 'ham' => [0, $response, $comment, []];
     }
-
-
-
 }
